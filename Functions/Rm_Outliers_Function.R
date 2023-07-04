@@ -2,7 +2,6 @@
 #Data from each subject is individually evaluated for performance for each module (i.e. only the below chance module data will be replaced for a given subject)
 #User can specify the cut_off values for each type of task 
 #This is the not as well written version that was used in the initial analyses. Including this version for exact replication purposes
-#For the 'better' version, see https://github.com/jessicayounger/project_iLEAD
 #All modules are evaluated
 #Jessica Younger 02/17/2021
 
