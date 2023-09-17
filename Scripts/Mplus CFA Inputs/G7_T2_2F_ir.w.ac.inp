@@ -1,0 +1,50 @@
+TITLE:      Configural Invariance - 2 Factor Model;
+
+DATA:       FILE IS "proj-InitialPapers_asmt-AS_time-1234_type-agg_shape-
+wide_clean_trimRTAccExOutlierRMBRTRegress_prog-Mplus_date-2023-03-07.csv";
+ 
+VARIABLE:   NAMES ARE pid Cohort gender 
+grade1 BSS_1 FSS_1 STSus_1 STImp_1 TNT_1 Flnk_1 Strp_1 TkSw_1 Box_1
+grade2 BSS_2 FSS_2 STSus_2 STImp_2 TNT_2 Flnk_2 Strp_2 TkSw_2 Box_2
+grade3 BSS_3 FSS_3 STSus_3 STImp_3 TNT_3 Flnk_3 Strp_3 TkSw_3 Box_3
+grade4 BSS_4 FSS_4 STSus_4 STImp_4 TNT_4 Flnk_4 Strp_4 TkSw_4 Box_4
+;
+
+            USEVAR = BSS_2 FSS_2 STSus_2 STImp_2 
+		     TNT_2 Strp_2 Flnk_2 Box_2;
+
+            USEOBSERVATIONS = Cohort eq 7;
+
+            MISSING ARE ALL (9999);
+
+DEFINE:     !Put Boxed and SAAT RT measures on same scale as RCS measures
+            Box_2 = -1*Box_2/100;
+            
+            STSus_2 = -1*STSus_2/100;  
+            
+ANALYSIS:   ITERATIONS = 10000;
+            ESTIMATOR = MLR;
+
+MODEL:      !CREATING LATENT VARIABLES
+            
+            
+          
+            WM2 BY BSS_2 FSS_2;
+            TD2 BY STSus_2 STImp_2 TNT_2 Strp_2 Flnk_2 Box_2; 
+         
+
+            !LATENT VARIABLES MEANS @0
+            [WM2 - TD2@0];
+
+            !LATENT VARIABLES VARIANCES
+            TD2 (1);
+            WM2 (2);
+                       
+            !MANIFEST VARIABLES MEANS
+            [BSS_2 - Box_2];
+         
+            !MANIFEST VARIABLES VARIANCES AND COVARIANCES (1st Order)
+            
+            BSS_2 - Box_2;
+
+ OUTPUT:    STANDARDIZED TECH1;
