@@ -10,5 +10,4 @@ Scripts are organized into the 'Scripts' folder, with additional functions calle
 4. No additional edits should be required to run the scripts to replicate the results described in Younger et al 2023
 
 # Notes
-Once data are made publically available, raw data and data dictionaries will be added to this repo
-
+Data are available at https://osf.io/scpkm/
